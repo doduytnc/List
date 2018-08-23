@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Management staff</title>
+</head>
+<body>
+<script>
+    function List() {
+        this.listSize = 0;
+        this.pos = 0;
+        this.dataStore = []; // initializes an empty array to store list elements
+
+        this.toString = toString;
+        this.find = find;
+        this.insert = insert;
+        this.append = append;
+        this.length = length;
+        this.moveTo = moveTo;
+        this.getElement = getElement;
+    }
+
+    function Employee(name,salary,email) {
+        this.name = name;
+        this.salary = salary;
+        this.email = email;
+
+        this.getName = function () {
+            return this.name;
+        }
+
+        this.getSalary = function () {
+            return this.salary;
+        }
+
+        this.getEmail = function () {
+            return this.email;
+        }
+    }
+
+    function append(element) {
+        this.dataStore[this.listSize++] = element;
+    }
+
+    function toString() {
+        return this.dataStore;
+    }
+
+    function getElement() {
+        return this.dataStore[this.pos];
+    }
+
+    function insert(element, after) {
+        var insertPos = this.find(after);
+        if (insertPos > -1) {
+            this.dataStore.splice(insertPos+1, 0, element);
+            ++this.listSize;
+            return true;
+        }
+        return false;
+    }
+
+    function find(element) {
+        for (var i = 0; i < this.dataStore.length; ++i) {
+            if (this.dataStore [i] == element) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    var em1 = new Employee("Mai Phuong Thuy",1000,"thuy@gmail.com");
+    var em2 = new Employee("Dang Thu Thao",1200,"thao@yahoo.com");
+    var em3 = new Employee("Ngoc Trinh",2000,"trinh@live.com");
+    var em4 = new Employee("Do My Linh",5000,"linhdo@vnn.vn");
+    var em5 = new Employee("Nguyen Cao Ky Duyen", 1500,"kyduyen@mon.com");
+    var em4_5 = new Employee("Quynh Kool",500,"koolq@olala.jp");
+
+    var listEmployee = new List();
+
+    listEmployee.append(em1);
+    listEmployee.append(em2);
+    listEmployee.append(em3);
+    listEmployee.append(em4);
+    listEmployee.append(em5);
+
+    listEmployee.insert(em4_5,em3); //them nhan vien em4_5 vao sau vi tri em3 (Ngoc Trinh)
+
+    for (i=0; i < listEmployee.listSize; i++) {
+        document.write((i+1) +"-" +listEmployee.toString()[i].name +" - " +listEmployee.toString()[i].salary +"$" +" - " +listEmployee.toString()[i].email +"<br>");
+    }
+
+</script>
+</body>
+</html>
